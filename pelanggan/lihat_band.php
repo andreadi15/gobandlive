@@ -1,7 +1,7 @@
 <?php
 /**
  * FILE: pelanggan/lihat_band.php
- * FUNGSI: Menampilkan daftar band/vokalis yang tersedia
+ * FUNGSI: Menampilkan daftar band/vokalis yang tersedia (UPDATED)
  */
 
 require_once '../config/config.php';
@@ -130,9 +130,9 @@ $genres = $genreStmt->fetchAll();
                 <?php if (count($bands) > 0): ?>
                     <?php foreach ($bands as $band): ?>
                         <div class="col-4">
-                            <div class="card">
+                            <div class="card" style="min-height: 600px; display: flex; flex-direction: column;">
                                 <!-- Icon Band -->
-                                <div style="background: linear-gradient(135deg, var(--primary), var(--secondary)); height: 180px; border-radius: var(--radius); margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem;">
+                                <div style="background: linear-gradient(135deg, var(--primary), var(--secondary)); height: 180px; border-radius: var(--radius); margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem; flex-shrink: 0;">
                                     🎤
                                 </div>
 
@@ -158,11 +158,35 @@ $genres = $genreStmt->fetchAll();
                                     <strong>Kontak:</strong> <?php echo htmlspecialchars($band['kontak']); ?>
                                 </p>
 
+                                <!-- Deskripsi dengan Truncate -->
                                 <?php if ($band['deskripsi']): ?>
-                                    <p class="text-gray" style="margin-bottom: 1rem; font-size: 0.9rem; line-height: 1.5;">
-                                        <?php echo htmlspecialchars(substr($band['deskripsi'], 0, 100)); ?>
-                                        <?php echo strlen($band['deskripsi']) > 100 ? '...' : ''; ?>
-                                    </p>
+                                    <div style="margin-bottom: 1rem; flex-grow: 1;">
+                                        <p class="text-gray" style="font-size: 0.9rem; line-height: 1.5; margin: 0;">
+                                            <span id="desc-short-<?php echo $band['id']; ?>">
+                                                <?php 
+                                                $desc = htmlspecialchars($band['deskripsi']);
+                                                if (strlen($desc) > 100) {
+                                                    echo substr($desc, 0, 100) . '...';
+                                                } else {
+                                                    echo $desc;
+                                                }
+                                                ?>
+                                            </span>
+                                            <?php if (strlen($band['deskripsi']) > 100): ?>
+                                                <span id="desc-full-<?php echo $band['id']; ?>" style="display: none;">
+                                                    <?php echo nl2br(htmlspecialchars($band['deskripsi'])); ?>
+                                                </span>
+                                                <a href="javascript:void(0)" 
+                                                   onclick="toggleDesc(<?php echo $band['id']; ?>)"
+                                                   id="desc-toggle-<?php echo $band['id']; ?>"
+                                                   style="color: var(--primary); font-weight: 500; cursor: pointer; display: block; margin-top: 0.5rem;">
+                                                    Lihat selengkapnya
+                                                </a>
+                                            <?php endif; ?>
+                                        </p>
+                                    </div>
+                                <?php else: ?>
+                                    <div style="margin-bottom: 1rem; flex-grow: 1;"></div>
                                 <?php endif; ?>
 
                                 <!-- Rating -->
@@ -181,7 +205,7 @@ $genres = $genreStmt->fetchAll();
                                     </p>
                                 <?php endif; ?>
 
-                                <a href="pesan_band.php?id=<?php echo $band['id']; ?>" class="btn btn-primary" style="width: 100%;">
+                                <a href="pesan_band.php?id=<?php echo $band['id']; ?>" class="btn btn-primary" style="width: 100%; margin-top: auto;">
                                     📅 Pesan Sekarang
                                 </a>
                             </div>
@@ -201,5 +225,23 @@ $genres = $genreStmt->fetchAll();
             </div>
         </main>
     </div>
+
+    <script>
+        function toggleDesc(bandId) {
+            const shortDesc = document.getElementById('desc-short-' + bandId);
+            const fullDesc = document.getElementById('desc-full-' + bandId);
+            const toggle = document.getElementById('desc-toggle-' + bandId);
+            
+            if (fullDesc.style.display === 'none') {
+                shortDesc.style.display = 'none';
+                fullDesc.style.display = 'inline';
+                toggle.textContent = 'Lihat lebih sedikit';
+            } else {
+                shortDesc.style.display = 'inline';
+                fullDesc.style.display = 'none';
+                toggle.textContent = 'Lihat selengkapnya';
+            }
+        }
+    </script>
 </body>
 </html>

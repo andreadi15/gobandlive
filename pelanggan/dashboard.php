@@ -1,7 +1,7 @@
 <?php
 /**
  * FILE: pelanggan/dashboard.php
- * FUNGSI: Dashboard utama untuk pelanggan
+ * FUNGSI: Dashboard utama untuk pelanggan (UPDATED)
  */
 
 require_once '../config/config.php';
@@ -131,12 +131,12 @@ $pesananTerbaru = $stmt->fetchAll();
                             </a>
                         </div>
                         <div class="col-4">
-                            <a href="status_pesanan.php" class="btn btn-info" style="width: 100%;">
+                            <a href="status_pesanan.php" class="btn" style="width: 100%; background: #3b82f6; color: white;">
                                 📋 Cek Status Pesanan
                             </a>
                         </div>
                         <div class="col-4">
-                            <a href="status_pesanan.php?tab=selesai" class="btn btn-success" style="width: 100%;">
+                            <a href="status_pesanan.php?tab=selesai" class="btn" style="width: 100%; background: var(--success); color: white;">
                                 ⭐ Beri Ulasan
                             </a>
                         </div>
@@ -154,6 +154,7 @@ $pesananTerbaru = $stmt->fetchAll();
                         <table class="table">
                             <thead>
                                 <tr>
+                                    <th>No</th>
                                     <th>ID</th>
                                     <th>Band/Vokalis</th>
                                     <th>Tanggal Acara</th>
@@ -164,8 +165,9 @@ $pesananTerbaru = $stmt->fetchAll();
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($pesananTerbaru as $pesanan): ?>
+                                <?php $no = 1; foreach ($pesananTerbaru as $pesanan): ?>
                                     <tr>
+                                        <td><?php echo $no++; ?></td>
                                         <td>#<?php echo $pesanan['id']; ?></td>
                                         <td>
                                             <strong><?php echo htmlspecialchars($pesanan['nama_band']); ?></strong><br>

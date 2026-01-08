@@ -1,7 +1,7 @@
 <?php
 /**
  * FILE: band/jadwal_tampil.php
- * FUNGSI: Melihat jadwal tampil band/vokalis
+ * FUNGSI: Melihat jadwal tampil band/vokalis (UPDATED)
  */
 
 require_once '../config/config.php';
@@ -98,15 +98,15 @@ foreach ($jadwalList as $jadwal) {
 
             <!-- Jadwal Mendatang -->
             <div class="card mb-3">
-                <div class="card-header" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white;">
-                    <h3 class="card-title">📅 Jadwal Mendatang</h3>
+                <div class="card-header" style="background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; border-radius: var(--radius) var(--radius) 0 0;">
+                    <h3 class="card-title" style="color: white;">📅 Jadwal Mendatang</h3>
                 </div>
                 <div class="card-body">
                     <?php if (count($jadwalMendatang) > 0): ?>
                         <div class="row">
                             <?php foreach ($jadwalMendatang as $jadwal): ?>
                                 <div class="col-6">
-                                    <div class="card" style="border-left: 4px solid var(--primary);">
+                                    <div class="card" style="border-left: 4px solid var(--primary); border-radius: var(--radius);">
                                         <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                                             <div>
                                                 <h4 style="margin: 0; color: var(--primary);">
@@ -184,6 +184,7 @@ foreach ($jadwalList as $jadwal) {
                         <table class="table">
                             <thead>
                                 <tr>
+                                    <th>No</th>
                                     <th>ID</th>
                                     <th>Tanggal</th>
                                     <th>Pelanggan</th>
@@ -192,8 +193,9 @@ foreach ($jadwalList as $jadwal) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($jadwalSelesai as $jadwal): ?>
+                                <?php $no = 1; foreach ($jadwalSelesai as $jadwal): ?>
                                     <tr>
+                                        <td><?php echo $no++; ?></td>
                                         <td>#<?php echo $jadwal['id']; ?></td>
                                         <td><?php echo formatTanggal($jadwal['tanggal']); ?></td>
                                         <td>
