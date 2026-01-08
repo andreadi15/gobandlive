@@ -1,7 +1,7 @@
 <?php
 /**
  * FILE: index.php
- * FUNGSI: Landing page utama aplikasi GOBANDLIVE
+ * FUNGSI: Landing page utama aplikasi GOBANDLIVE (UPDATED)
  */
 
 require_once 'config/config.php';

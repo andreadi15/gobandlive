@@ -1,7 +1,7 @@
 <?php
 /**
  * FILE: admin/dashboard.php
- * FUNGSI: Dashboard utama untuk admin
+ * FUNGSI: Dashboard utama untuk admin (UPDATED)
  */
 
 require_once '../config/config.php';
@@ -122,27 +122,27 @@ $pembayaranMenunggu = $stmt->fetchAll();
             <!-- Statistik Cards -->
             <div class="row mb-3">
                 <div class="col-3">
-                    <div class="card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                    <div class="card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; min-height: 140px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
                         <h3 style="font-size: 2.5rem; margin-bottom: 0.5rem;"><?php echo $totalPelanggan; ?></h3>
-                        <p>Total Pelanggan</p>
+                        <p style="margin: 0;">Total Pelanggan</p>
                     </div>
                 </div>
                 <div class="col-3">
-                    <div class="card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+                    <div class="card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; min-height: 140px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
                         <h3 style="font-size: 2.5rem; margin-bottom: 0.5rem;"><?php echo $totalBand; ?></h3>
-                        <p>Total Band</p>
+                        <p style="margin: 0;">Total Band</p>
                     </div>
                 </div>
                 <div class="col-3">
-                    <div class="card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white;">
+                    <div class="card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; min-height: 140px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
                         <h3 style="font-size: 2.5rem; margin-bottom: 0.5rem;"><?php echo $totalPesanan; ?></h3>
-                        <p>Total Pesanan</p>
+                        <p style="margin: 0;">Total Pesanan</p>
                     </div>
                 </div>
                 <div class="col-3">
-                    <div class="card" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white;">
-                        <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;"><?php echo formatRupiah($totalPendapatan); ?></h3>
-                        <p>Total Pendapatan</p>
+                    <div class="card" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; min-height: 140px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                        <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; word-break: break-word; text-align: center;"><?php echo formatRupiah($totalPendapatan); ?></h3>
+                        <p style="margin: 0;">Total Pendapatan</p>
                     </div>
                 </div>
             </div>
@@ -179,7 +179,7 @@ $pembayaranMenunggu = $stmt->fetchAll();
                 <!-- Pembayaran Menunggu Verifikasi -->
                 <div class="col-6">
                     <div class="card">
-                        <div class="card-header" style="background: var(--warning); color: white;">
+                        <div class="card-header" style="background: var(--warning); color: white; border-radius: var(--radius) var(--radius) 0 0;">
                             <h3 class="card-title">⏳ Menunggu Verifikasi (<?php echo count($pembayaranMenunggu); ?>)</h3>
                         </div>
                         <div class="card-body">
@@ -187,6 +187,7 @@ $pembayaranMenunggu = $stmt->fetchAll();
                                 <table class="table">
                                     <thead>
                                         <tr>
+                                            <th>No</th>
                                             <th>Pesanan</th>
                                             <th>Pelanggan</th>
                                             <th>Band</th>
@@ -194,8 +195,9 @@ $pembayaranMenunggu = $stmt->fetchAll();
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($pembayaranMenunggu as $bayar): ?>
+                                        <?php $no = 1; foreach ($pembayaranMenunggu as $bayar): ?>
                                             <tr>
+                                                <td><?php echo $no++; ?></td>
                                                 <td>#<?php echo $bayar['pesanan_id']; ?></td>
                                                 <td><?php echo htmlspecialchars($bayar['nama_pelanggan']); ?></td>
                                                 <td><?php echo htmlspecialchars($bayar['nama_band']); ?></td>
@@ -233,6 +235,7 @@ $pembayaranMenunggu = $stmt->fetchAll();
                                 <table class="table">
                                     <thead>
                                         <tr>
+                                            <th>No</th>
                                             <th>ID</th>
                                             <th>Pelanggan</th>
                                             <th>Band</th>
@@ -240,8 +243,9 @@ $pembayaranMenunggu = $stmt->fetchAll();
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($pesananTerbaru as $pesanan): ?>
+                                        <?php $no = 1; foreach ($pesananTerbaru as $pesanan): ?>
                                             <tr>
+                                                <td><?php echo $no++; ?></td>
                                                 <td>#<?php echo $pesanan['id']; ?></td>
                                                 <td><?php echo htmlspecialchars($pesanan['nama_pelanggan']); ?></td>
                                                 <td><?php echo htmlspecialchars($pesanan['nama_band']); ?></td>

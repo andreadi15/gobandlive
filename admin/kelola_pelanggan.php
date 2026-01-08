@@ -1,7 +1,7 @@
 <?php
 /**
  * FILE: admin/kelola_pelanggan.php
- * FUNGSI: Mengelola data pelanggan (CRUD)
+ * FUNGSI: Mengelola data pelanggan (CRUD) - UPDATED
  */
 
 require_once '../config/config.php';
@@ -97,7 +97,7 @@ $pelangganList = $stmt->fetchAll();
                 <div class="card-body">
                     <form method="GET" action="">
                         <div class="row">
-                            <div class="col-10">
+                            <div class="col-9">
                                 <input 
                                     type="text" 
                                     name="search" 
@@ -106,9 +106,10 @@ $pelangganList = $stmt->fetchAll();
                                     value="<?php echo htmlspecialchars($search); ?>"
                                 >
                             </div>
-                            <div class="col-2">
-                                <button type="submit" class="btn btn-primary" style="width: 100%;">
-                                    🔍 Cari
+                            <div class="col-3">
+                                <button type="submit" class="btn btn-primary" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                                    <span>🔍</span>
+                                    <span>Cari</span>
                                 </button>
                             </div>
                         </div>
@@ -126,7 +127,7 @@ $pelangganList = $stmt->fetchAll();
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>No</th>
                                     <th>Nama</th>
                                     <th>Email</th>
                                     <th>No. HP</th>
@@ -136,9 +137,9 @@ $pelangganList = $stmt->fetchAll();
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($pelangganList as $pelanggan): ?>
+                                <?php $no = 1; foreach ($pelangganList as $pelanggan): ?>
                                     <tr>
-                                        <td><?php echo $pelanggan['id']; ?></td>
+                                        <td><?php echo $no++; ?></td>
                                         <td><strong><?php echo htmlspecialchars($pelanggan['nama']); ?></strong></td>
                                         <td><?php echo htmlspecialchars($pelanggan['email']); ?></td>
                                         <td><?php echo htmlspecialchars($pelanggan['no_hp']); ?></td>

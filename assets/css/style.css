@@ -1,6 +1,6 @@
 /**
  * FILE: assets/css/style.css
- * FUNGSI: Styling modern untuk aplikasi GOBANDLIVE
+ * FUNGSI: Styling modern untuk aplikasi GOBANDLIVE (UPDATED)
  */
 
 /* Reset & Base */
@@ -67,6 +67,7 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+    padding-left: 2rem;
 }
 
 .navbar-menu {
@@ -85,6 +86,18 @@ body {
 
 .navbar-menu a:hover {
     color: var(--primary);
+}
+
+/* Navbar Logout Button */
+.navbar-menu .btn-danger {
+    background: var(--danger);
+    color: white;
+}
+
+.navbar-menu .btn-danger:hover {
+    background: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 /* Button Styles */
@@ -120,6 +133,12 @@ body {
 .btn-success {
     background: var(--success);
     color: var(--white);
+}
+
+.btn-success:hover {
+    background: #059669;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 .btn-danger {
@@ -169,6 +188,18 @@ body {
     animation: fadeInUp 0.8s;
 }
 
+/* Hero Button - Lihat Band & Vokalis hover effect */
+.hero .btn {
+    transition: all 0.3s ease;
+}
+
+.hero .btn:hover {
+    background: var(--primary) !important;
+    color: white !important;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+}
+
 /* Card */
 .card {
     background: var(--white);
@@ -181,7 +212,7 @@ body {
 
 .card:hover {
     box-shadow: var(--shadow-lg);
-    transform: translateY(-5px);
+    transform: translateY(-8px);
 }
 
 .card-header {
@@ -198,6 +229,13 @@ body {
 
 .card-body {
     padding: 1rem 0;
+}
+
+/* Menu Cepat Button Hover */
+.card-body a.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+    opacity: 0.9;
 }
 
 /* Form Styles */
@@ -344,11 +382,18 @@ textarea.form-control {
     padding: 0 10px;
 }
 
+.col-auto {
+    flex: 0 0 auto;
+    padding: 0 10px;
+}
+
 .col-2 { flex: 0 0 16.666%; max-width: 16.666%; }
 .col-3 { flex: 0 0 25%; max-width: 25%; }
 .col-4 { flex: 0 0 33.333%; max-width: 33.333%; }
 .col-6 { flex: 0 0 50%; max-width: 50%; }
 .col-8 { flex: 0 0 66.666%; max-width: 66.666%; }
+.col-9 { flex: 0 0 75%; max-width: 75%; }
+.col-10 { flex: 0 0 83.333%; max-width: 83.333%; }
 .col-12 { flex: 0 0 100%; max-width: 100%; }
 
 /* Sidebar */
@@ -379,6 +424,12 @@ textarea.form-control {
 .sidebar-menu li a.active {
     background: var(--primary);
     color: var(--white);
+}
+
+/* Sidebar Logout - Hover Merah */
+.sidebar-menu li a[href*="logout"]:hover {
+    background: var(--danger) !important;
+    color: white !important;
 }
 
 /* Main Content dengan Sidebar */
