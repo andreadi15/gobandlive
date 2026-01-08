@@ -93,9 +93,9 @@ $ulasanList = $stmt->fetchAll();
                 <li><a href="jadwal_tampil.php">Jadwal</a></li>
                 <li><a href="lihat_ulasan.php">Ulasan</a></li>
                 <li>
-                    <span style="color: var(--gray);">
+                    <a href="edit_profil.php" class="user-profile-link">
                         Halo, <strong><?php echo htmlspecialchars($_SESSION['nama']); ?></strong>
-                    </span>
+                    </a>
                 </li>
                 <li><a href="../auth/logout.php" class="btn btn-danger btn-sm">Logout</a></li>
             </ul>
@@ -109,6 +109,7 @@ $ulasanList = $stmt->fetchAll();
                 <li><a href="pesanan_masuk.php">📥 Pesanan Masuk</a></li>
                 <li><a href="jadwal_tampil.php">📅 Jadwal Tampil</a></li>
                 <li><a href="lihat_ulasan.php" class="active">⭐ Ulasan</a></li>
+                <li><a href="edit_profil.php">⚙️ Edit Profil</a></li>
                 <li><a href="../auth/logout.php">🚪 Logout</a></li>
             </ul>
         </aside>

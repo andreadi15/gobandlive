@@ -65,9 +65,9 @@ $genres = $genreStmt->fetchAll();
                 <li><a href="lihat_band.php">Lihat Band</a></li>
                 <li><a href="status_pesanan.php">Pesanan Saya</a></li>
                 <li>
-                    <span style="color: var(--gray);">
+                    <a href="edit_profil.php" class="user-profile-link">
                         Halo, <strong><?php echo htmlspecialchars($_SESSION['nama']); ?></strong>
-                    </span>
+                    </a>
                 </li>
                 <li><a href="../auth/logout.php" class="btn btn-danger btn-sm">Logout</a></li>
             </ul>
@@ -80,6 +80,7 @@ $genres = $genreStmt->fetchAll();
                 <li><a href="dashboard.php">📊 Dashboard</a></li>
                 <li><a href="lihat_band.php" class="active">🎸 Lihat Band</a></li>
                 <li><a href="status_pesanan.php">📋 Pesanan Saya</a></li>
+                <li><a href="edit_profil.php">⚙️ Edit Profil</a></li>
                 <li><a href="../auth/logout.php">🚪 Logout</a></li>
             </ul>
         </aside>

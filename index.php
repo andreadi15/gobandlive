@@ -49,8 +49,8 @@ $bands = $stmt->fetchAll();
                     <?php endif; ?>
                     <li><a href="auth/logout.php">Logout</a></li>
                 <?php else: ?>
-                    <li><a href="auth/login.php" class="btn btn-outline btn-sm">Login</a></li>
-                    <li><a href="auth/register.php" class="btn btn-primary btn-sm">Daftar</a></li>
+                    <li><a href="auth/login.php" class="btn btn-outline btn-sm login">Login</a></li>
+                    <li><a href="auth/register.php" style="color:white" class="btn btn-primary btn-sm">Daftar</a></li>
                 <?php endif; ?>
             </ul>
         </div>
