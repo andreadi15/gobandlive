@@ -1,7 +1,7 @@
 <?php
 /**
  * FILE: band/dashboard.php
- * FUNGSI: Dashboard utama untuk band/vokalis
+ * FUNGSI: Dashboard utama untuk band/vokalis (UPDATED)
  */
 
 require_once '../config/config.php';
@@ -165,7 +165,7 @@ $jadwalMendatang = $stmt->fetchAll();
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-2">
+                        <div class="col-2" style="padding-right: 2rem;">
                             <div style="background: linear-gradient(135deg, var(--primary), var(--secondary)); height: 120px; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
                                 🎤
                             </div>
@@ -209,6 +209,7 @@ $jadwalMendatang = $stmt->fetchAll();
                                 <table class="table">
                                     <thead>
                                         <tr>
+                                            <th>No</th>
                                             <th>ID</th>
                                             <th>Pelanggan</th>
                                             <th>Tanggal</th>
@@ -216,8 +217,9 @@ $jadwalMendatang = $stmt->fetchAll();
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($pesananTerbaru as $pesanan): ?>
+                                        <?php $no = 1; foreach ($pesananTerbaru as $pesanan): ?>
                                             <tr>
+                                                <td><?php echo $no++; ?></td>
                                                 <td>#<?php echo $pesanan['id']; ?></td>
                                                 <td><?php echo htmlspecialchars($pesanan['nama_pelanggan']); ?></td>
                                                 <td><?php echo formatTanggal($pesanan['tanggal_acara']); ?></td>
@@ -251,14 +253,16 @@ $jadwalMendatang = $stmt->fetchAll();
                                 <table class="table">
                                     <thead>
                                         <tr>
+                                            <th>No</th>
                                             <th>Tanggal</th>
                                             <th>Pelanggan</th>
                                             <th>Lokasi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($jadwalMendatang as $jadwal): ?>
+                                        <?php $no = 1; foreach ($jadwalMendatang as $jadwal): ?>
                                             <tr>
+                                                <td><?php echo $no++; ?></td>
                                                 <td><?php echo formatTanggal($jadwal['tanggal']); ?></td>
                                                 <td><?php echo htmlspecialchars($jadwal['nama_pelanggan']); ?></td>
                                                 <td><?php echo htmlspecialchars(substr($jadwal['lokasi'], 0, 20)); ?>...</td>

@@ -1,7 +1,7 @@
 <?php
 /**
  * FILE: admin/kelola_band.php
- * FUNGSI: Mengelola data band/vokalis (CRUD)
+ * FUNGSI: Mengelola data band/vokalis (CRUD) - UPDATED
  */
 
 require_once '../config/config.php';
@@ -129,7 +129,7 @@ $bandList = $stmt->fetchAll();
                 <div class="card-body">
                     <form method="GET" action="">
                         <div class="row">
-                            <div class="col-10">
+                            <div class="col-9">
                                 <input 
                                     type="text" 
                                     name="search" 
@@ -138,9 +138,10 @@ $bandList = $stmt->fetchAll();
                                     value="<?php echo htmlspecialchars($search); ?>"
                                 >
                             </div>
-                            <div class="col-2">
-                                <button type="submit" class="btn btn-primary" style="width: 100%;">
-                                    🔍 Cari
+                            <div class="col-3">
+                                <button type="submit" class="btn btn-primary" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                                    <span>🔍</span>
+                                    <span>Cari</span>
                                 </button>
                             </div>
                         </div>
@@ -158,7 +159,7 @@ $bandList = $stmt->fetchAll();
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>No</th>
                                     <th>Nama Band</th>
                                     <th>Genre</th>
                                     <th>Pemilik</th>
@@ -170,9 +171,9 @@ $bandList = $stmt->fetchAll();
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($bandList as $band): ?>
+                                <?php $no = 1; foreach ($bandList as $band): ?>
                                     <tr>
-                                        <td><?php echo $band['id']; ?></td>
+                                        <td><?php echo $no++; ?></td>
                                         <td><strong><?php echo htmlspecialchars($band['nama_band']); ?></strong></td>
                                         <td>
                                             <span class="badge badge-info">

@@ -1,7 +1,7 @@
 <?php
 /**
  * FILE: admin/laporan.php
- * FUNGSI: Membuat dan melihat laporan transaksi
+ * FUNGSI: Membuat dan melihat laporan transaksi (UPDATED)
  */
 
 require_once '../config/config.php';
@@ -148,28 +148,27 @@ $laporanList = $stmt->fetchAll();
 
             <!-- Form Generate Laporan -->
             <div class="card mb-3">
-                <div class="card-header" style="background: var(--primary); color: white;">
+                <div class="card-header" style="background: var(--primary); color: white; border-radius: var(--radius) var(--radius) 0 0;">
                     <h3 class="card-title">📝 Buat Laporan Baru</h3>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="">
-                        <div class="row">
-                            <div class="col-5">
+                        <div class="row" style="gap: 1rem;">
+                            <div class="col">
                                 <div class="form-group">
                                     <label class="form-label">Periode Awal</label>
                                     <input type="date" name="periode_awal" class="form-control" required>
                                 </div>
                             </div>
-                            <div class="col-5">
+                            <div class="col">
                                 <div class="form-group">
                                     <label class="form-label">Periode Akhir</label>
                                     <input type="date" name="periode_akhir" class="form-control" required>
                                 </div>
                             </div>
-                            <div class="col-2">
-                                <div class="form-group">
-                                    <label class="form-label">&nbsp;</label>
-                                    <button type="submit" name="generate" class="btn btn-primary" style="width: 100%;">
+                            <div class="col-auto" style="display: flex; align-items: flex-end;">
+                                <div class="form-group" style="margin-bottom: 1.5rem;">
+                                    <button type="submit" name="generate" class="btn btn-primary">
                                         Generate
                                     </button>
                                 </div>
@@ -204,25 +203,27 @@ $laporanList = $stmt->fetchAll();
                     <!-- Statistik Cards -->
                     <div class="row">
                         <div class="col-3">
-                            <div class="card text-center" style="background: var(--light);">
+                            <div class="card text-center" style="background: var(--light); min-height: 120px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
                                 <h3 style="font-size: 2rem; color: var(--primary);"><?php echo $stats['total_pesanan'] ?? 0; ?></h3>
                                 <p class="text-gray">Total Pesanan</p>
                             </div>
                         </div>
                         <div class="col-3">
-                            <div class="card text-center" style="background: var(--light);">
+                            <div class="card text-center" style="background: var(--light); min-height: 120px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
                                 <h3 style="font-size: 2rem; color: var(--success);"><?php echo $stats['total_pembayaran'] ?? 0; ?></h3>
                                 <p class="text-gray">Pembayaran Verified</p>
                             </div>
                         </div>
                         <div class="col-3">
-                            <div class="card text-center" style="background: var(--light);">
-                                <h3 style="font-size: 1.3rem; color: var(--primary);"><?php echo formatRupiah($stats['total_pendapatan'] ?? 0); ?></h3>
+                            <div class="card text-center" style="background: var(--light); min-height: 120px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                <h3 style="font-size: 1.3rem; color: var(--primary); word-break: break-word; padding: 0 0.5rem;">
+                                    <?php echo formatRupiah($stats['total_pendapatan'] ?? 0); ?>
+                                </h3>
                                 <p class="text-gray">Total Pendapatan</p>
                             </div>
                         </div>
                         <div class="col-3">
-                            <div class="card text-center" style="background: var(--light);">
+                            <div class="card text-center" style="background: var(--light); min-height: 120px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
                                 <h3 style="font-size: 2rem; color: var(--info);"><?php echo $stats['total_band_aktif'] ?? 0; ?></h3>
                                 <p class="text-gray">Band Aktif</p>
                             </div>
@@ -278,16 +279,16 @@ $laporanList = $stmt->fetchAll();
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th>No</th>
                                             <th>Periode</th>
                                             <th>Total</th>
                                             <th>Pendapatan</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($laporanList as $lap): ?>
+                                        <?php $no = 1; foreach ($laporanList as $lap): ?>
                                             <tr>
-                                                <td>#<?php echo $lap['id']; ?></td>
+                                                <td><?php echo $no++; ?></td>
                                                 <td>
                                                     <?php echo date('d/m/Y', strtotime($lap['periode_awal'])); ?> - 
                                                     <?php echo date('d/m/Y', strtotime($lap['periode_akhir'])); ?>
