@@ -124,6 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <li><a href="dashboard.php">📊 Dashboard</a></li>
                 <li><a href="lihat_band.php" class="active">🎸 Lihat Band</a></li>
                 <li><a href="status_pesanan.php">📋 Pesanan Saya</a></li>
+                <li><a href="edit_profil.php">⚙️ Edit Profil</a></li>
                 <li><a href="../auth/logout.php">🚪 Logout</a></li>
             </ul>
         </aside>
@@ -150,9 +151,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <h3 class="card-title">Detail Band</h3>
                         </div>
                         <div class="card-body">
-                            <div style="background: linear-gradient(135deg, var(--primary), var(--secondary)); height: 150px; border-radius: var(--radius); margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
-                                🎤
-                            </div>
+                            <?php if ($band['foto'] && file_exists(__DIR__ . '/../uploads/band_photos/' . $band['foto'])): ?>
+                                <img src="../uploads/band_photos/<?php echo htmlspecialchars($band['foto']); ?>" 
+                                    alt="<?php echo htmlspecialchars($band['nama_band']); ?>"
+                                    style="width: 100%; height: 200px; border-radius: var(--radius); margin-bottom: 1rem; object-fit: cover;">
+                            <?php else: ?>
+                                <div style="background: linear-gradient(135deg, var(--primary), var(--secondary)); height: 200px; border-radius: var(--radius); margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+                                    🎤
+                                </div>
+                            <?php endif; ?>
 
                             <h3><?php echo htmlspecialchars($band['nama_band']); ?></h3>
                             

@@ -86,6 +86,7 @@ foreach ($jadwalList as $jadwal) {
                 <li><a href="pesanan_masuk.php">📥 Pesanan Masuk</a></li>
                 <li><a href="jadwal_tampil.php" class="active">📅 Jadwal Tampil</a></li>
                 <li><a href="lihat_ulasan.php">⭐ Ulasan</a></li>
+                <li><a href="edit_profil.php">⚙️ Edit Profil</a></li>
                 <li><a href="../auth/logout.php">🚪 Logout</a></li>
             </ul>
         </aside>

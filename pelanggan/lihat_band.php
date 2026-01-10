@@ -133,9 +133,15 @@ $genres = $genreStmt->fetchAll();
                         <div class="col-4">
                             <div class="card" style="min-height: 600px; display: flex; flex-direction: column;">
                                 <!-- Icon Band -->
-                                <div style="background: linear-gradient(135deg, var(--primary), var(--secondary)); height: 180px; border-radius: var(--radius); margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem; flex-shrink: 0;">
-                                    🎤
-                                </div>
+                                <?php if ($band['foto'] && file_exists(__DIR__ . '/../uploads/band_photos/' . $band['foto'])): ?>
+                                    <img src="../uploads/band_photos/<?php echo htmlspecialchars($band['foto']); ?>" 
+                                        alt="<?php echo htmlspecialchars($band['nama_band']); ?>"
+                                        style="width: 100%; height: 200px; border-radius: var(--radius); margin-bottom: 1rem; object-fit: cover; flex-shrink: 0;">
+                                <?php else: ?>
+                                    <div style="background: linear-gradient(135deg, var(--primary), var(--secondary)); height: 200px; border-radius: var(--radius); margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem; flex-shrink: 0;">
+                                        🎤
+                                    </div>
+                                <?php endif; ?>
 
                                 <h3 style="margin-bottom: 0.5rem;">
                                     <?php echo htmlspecialchars($band['nama_band']); ?>

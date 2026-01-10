@@ -105,6 +105,7 @@ $pesananList = $stmt->fetchAll();
                 <li><a href="pesanan_masuk.php" class="active">📥 Pesanan Masuk</a></li>
                 <li><a href="jadwal_tampil.php">📅 Jadwal Tampil</a></li>
                 <li><a href="lihat_ulasan.php">⭐ Ulasan</a></li>
+                <li><a href="edit_profil.php">⚙️ Edit Profil</a></li>
                 <li><a href="../auth/logout.php">🚪 Logout</a></li>
             </ul>
         </aside>

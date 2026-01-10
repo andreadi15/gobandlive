@@ -112,9 +112,17 @@ $bands = $stmt->fetchAll();
                     <?php foreach ($bands as $band): ?>
                         <div class="col-4">
                             <div class="card">
-                                <div style="background: linear-gradient(135deg, var(--primary), var(--secondary)); height: 150px; border-radius: var(--radius); margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
-                                    🎤
-                                </div>
+                                <!-- Foto Band -->
+                                <?php if ($band['foto'] && file_exists(__DIR__ . '/uploads/band_photos/' . $band['foto'])): ?>
+                                    <img src="uploads/band_photos/<?php echo htmlspecialchars($band['foto']); ?>" 
+                                         alt="<?php echo htmlspecialchars($band['nama_band']); ?>"
+                                         style="width: 100%; height: 200px; object-fit: cover; border-radius: var(--radius); margin-bottom: 1rem;">
+                                <?php else: ?>
+                                    <div style="background: linear-gradient(135deg, var(--primary), var(--secondary)); height: 200px; border-radius: var(--radius); margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem;">
+                                        🎤
+                                    </div>
+                                <?php endif; ?>
+
                                 <h3><?php echo htmlspecialchars($band['nama_band']); ?></h3>
                                 <p class="text-gray">
                                     <strong>Genre:</strong> <?php echo htmlspecialchars($band['genre']); ?>

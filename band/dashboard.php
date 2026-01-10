@@ -1,7 +1,7 @@
 <?php
 /**
  * FILE: band/dashboard.php
- * FUNGSI: Dashboard utama untuk band/vokalis (UPDATED)
+ * FUNGSI: Dashboard utama untuk band/vokalis (UPDATED WITH PHOTO)
  */
 
 require_once '../config/config.php';
@@ -118,7 +118,7 @@ $jadwalMendatang = $stmt->fetchAll();
                 <li><a href="pesanan_masuk.php">📥 Pesanan Masuk</a></li>
                 <li><a href="jadwal_tampil.php">📅 Jadwal Tampil</a></li>
                 <li><a href="lihat_ulasan.php">⭐ Ulasan</a></li>
-                <li><a href="edit_profil.php">👤 Edit Profil</a></li>
+                <li><a href="edit_profil.php">⚙️ Edit Profil</a></li>
                 <li><a href="../auth/logout.php">🚪 Logout</a></li>
             </ul>
         </aside>
@@ -140,7 +140,7 @@ $jadwalMendatang = $stmt->fetchAll();
                 <div class="col-3">
                     <div class="card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
                         <h3 style="font-size: 2.5rem; margin-bottom: 0.5rem;"><?php echo $pesananAktif; ?></h3>
-                        <p>Pesanan</p>
+                        <p>Pesanan Aktif</p>
                     </div>
                 </div>
                 <div class="col-3">
@@ -167,9 +167,15 @@ $jadwalMendatang = $stmt->fetchAll();
                 <div class="card-body">
                     <div class="row">
                         <div class="col-2" style="padding-right: 2rem;">
-                            <div style="background: linear-gradient(135deg, var(--primary), var(--secondary)); height: 120px; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
-                                🎤
-                            </div>
+                            <?php if ($bandData['foto'] && file_exists(__DIR__ . '/../uploads/band_photos/' . $bandData['foto'])): ?>
+                                <img src="../uploads/band_photos/<?php echo htmlspecialchars($bandData['foto']); ?>" 
+                                     alt="<?php echo htmlspecialchars($bandData['nama_band']); ?>"
+                                     style="width: 120px; height: 120px; border-radius: var(--radius); object-fit: cover; box-shadow: var(--shadow-lg);">
+                            <?php else: ?>
+                                <div style="background: linear-gradient(135deg, var(--primary), var(--secondary)); height: 120px; width: 120px; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+                                    🎤
+                                </div>
+                            <?php endif; ?>
                         </div>
                         <div class="col-10">
                             <h3><?php echo htmlspecialchars($bandData['nama_band']); ?></h3>
@@ -198,19 +204,18 @@ $jadwalMendatang = $stmt->fetchAll();
                 </div>
             </div>
 
-            <!-- <div class="row">
-                Pesanan Terbaru
+            <div class="row">
+                <!-- Pesanan Terbaru -->
                 <div class="col-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Pesanan</h3>
+                            <h3 class="card-title">Pesanan Aktif</h3>
                         </div>
                         <div class="card-body">
                             <?php if (count($pesananTerbaru) > 0): ?>
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
                                             <th>ID</th>
                                             <th>Pelanggan</th>
                                             <th>Tanggal</th>
@@ -218,9 +223,8 @@ $jadwalMendatang = $stmt->fetchAll();
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $no = 1; foreach ($pesananTerbaru as $pesanan): ?>
+                                        <?php foreach ($pesananTerbaru as $pesanan): ?>
                                             <tr>
-                                                <td><?php echo $no++; ?></td>
                                                 <td>#<?php echo $pesanan['id']; ?></td>
                                                 <td><?php echo htmlspecialchars($pesanan['nama_pelanggan']); ?></td>
                                                 <td><?php echo formatTanggal($pesanan['tanggal_acara']); ?></td>
@@ -241,7 +245,7 @@ $jadwalMendatang = $stmt->fetchAll();
                             <?php endif; ?>
                         </div>
                     </div>
-                </div> -->
+                </div>
 
                 <!-- Jadwal Mendatang -->
                 <div class="col-6">
@@ -254,16 +258,14 @@ $jadwalMendatang = $stmt->fetchAll();
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
                                             <th>Tanggal</th>
                                             <th>Pelanggan</th>
                                             <th>Lokasi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $no = 1; foreach ($jadwalMendatang as $jadwal): ?>
+                                        <?php foreach ($jadwalMendatang as $jadwal): ?>
                                             <tr>
-                                                <td><?php echo $no++; ?></td>
                                                 <td><?php echo formatTanggal($jadwal['tanggal']); ?></td>
                                                 <td><?php echo htmlspecialchars($jadwal['nama_pelanggan']); ?></td>
                                                 <td><?php echo htmlspecialchars(substr($jadwal['lokasi'], 0, 20)); ?>...</td>

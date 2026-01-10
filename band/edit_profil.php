@@ -50,6 +50,29 @@ if (isset($_POST['update_profil'])) {
         $errors[] = 'Email sudah digunakan user lain';
     }
     
+    // Handle upload foto
+    $fotoName = $bandData['foto']; // Keep existing photo
+    if (isset($_FILES['foto']) && $_FILES['foto']['error'] !== UPLOAD_ERR_NO_FILE) {
+        // Validasi foto
+        $fotoErrors = validateUpload($_FILES['foto']);
+        if (!empty($fotoErrors)) {
+            $errors = array_merge($errors, $fotoErrors);
+        } else {
+            // Upload foto baru
+            $uploadDir = __DIR__ . '/../uploads/band_photos/';
+            $newFoto = uploadFile($_FILES['foto'], $uploadDir);
+            if ($newFoto) {
+                // Hapus foto lama jika ada
+                if ($bandData['foto'] && file_exists($uploadDir . $bandData['foto'])) {
+                    unlink($uploadDir . $bandData['foto']);
+                }
+                $fotoName = $newFoto;
+            } else {
+                $errors[] = 'Gagal mengupload foto';
+            }
+        }
+    }
+    
     if (empty($errors)) {
         try {
             $db->beginTransaction();
@@ -65,10 +88,10 @@ if (isset($_POST['update_profil'])) {
             // Update tabel band
             $stmt = $db->prepare("
                 UPDATE band 
-                SET nama_band = ?, genre = ?, tarif = ?, kontak = ?, deskripsi = ?, status_ketersediaan = ?
+                SET nama_band = ?, genre = ?, tarif = ?, kontak = ?, deskripsi = ?, status_ketersediaan = ?, foto = ?
                 WHERE user_id = ?
             ");
-            $stmt->execute([$nama_band, $genre, $tarif, $kontak, $deskripsi, $status_ketersediaan, $userId]);
+            $stmt->execute([$nama_band, $genre, $tarif, $kontak, $deskripsi, $status_ketersediaan, $fotoName, $userId]);
             
             $db->commit();
             
@@ -205,7 +228,7 @@ if (isset($_POST['update_password'])) {
                 </div>
 
                 <!-- Form Edit Profil -->
-                <form method="POST" action="">
+                <form method="POST" action="" enctype="multipart/form-data">
                     <div class="form-section">
                         <h3 class="form-section-title">Informasi Akun</h3>
                         <div class="row">
@@ -257,6 +280,19 @@ if (isset($_POST['update_password'])) {
                                     <input type="text" name="kontak" class="form-control" value="<?php echo htmlspecialchars($bandData['kontak']); ?>" required>
                                 </div>
                             </div>
+                        </div>
+                         <div class="form-group">
+                            <label class="form-label">Foto Band</label>
+                            <?php if ($bandData['foto'] && file_exists(__DIR__ . '/../uploads/band_photos/' . $bandData['foto'])): ?>
+                                <div style="margin-bottom: 1rem;">
+                                    <img src="../uploads/band_photos/<?php echo htmlspecialchars($bandData['foto']); ?>" 
+                                         alt="Foto Band" 
+                                         style="width: 200px; height: 200px; object-fit: cover; border-radius: var(--radius); border: 2px solid var(--light);">
+                                    <p class="text-gray" style="margin-top: 0.5rem; font-size: 0.9rem;">Foto saat ini</p>
+                                </div>
+                            <?php endif; ?>
+                            <input type="file" name="foto" class="form-control" accept="image/jpeg,image/png,image/jpg">
+                            <small class="text-gray">Upload foto band (JPG/PNG, max 2MB). Kosongkan jika tidak ingin mengubah foto.</small>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Deskripsi Band</label>

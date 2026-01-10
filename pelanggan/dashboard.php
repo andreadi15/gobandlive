@@ -79,7 +79,7 @@ $pesananTerbaru = $stmt->fetchAll();
                 <li><a href="dashboard.php" class="active">📊 Dashboard</a></li>
                 <li><a href="lihat_band.php">🎸 Lihat Band</a></li>
                 <li><a href="status_pesanan.php">📋 Pesanan Saya</a></li>
-                <li><a href="edit_profil.php">👤 Edit Profil</a></li>
+                <li><a href="edit_profil.php">⚙️ Edit Profil</a></li>
                 <li><a href="../auth/logout.php">🚪 Logout</a></li>
             </ul>
         </aside>

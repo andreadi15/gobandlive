@@ -139,6 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <li><a href="dashboard.php">📊 Dashboard</a></li>
                 <li><a href="lihat_band.php">🎸 Lihat Band</a></li>
                 <li><a href="status_pesanan.php" class="active">📋 Pesanan Saya</a></li>
+                <li><a href="edit_profil.php">⚙️ Edit Profil</a></li>
                 <li><a href="../auth/logout.php">🚪 Logout</a></li>
             </ul>
         </aside>
