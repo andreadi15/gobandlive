@@ -140,7 +140,7 @@ $jadwalMendatang = $stmt->fetchAll();
                 <div class="col-3">
                     <div class="card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
                         <h3 style="font-size: 2.5rem; margin-bottom: 0.5rem;"><?php echo $pesananAktif; ?></h3>
-                        <p>Pesanan Aktif</p>
+                        <p>Pesanan</p>
                     </div>
                 </div>
                 <div class="col-3">
@@ -198,12 +198,12 @@ $jadwalMendatang = $stmt->fetchAll();
                 </div>
             </div>
 
-            <div class="row">
-                <!-- Pesanan Terbaru -->
+            <!-- <div class="row">
+                Pesanan Terbaru
                 <div class="col-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Pesanan Aktif</h3>
+                            <h3 class="card-title">Pesanan</h3>
                         </div>
                         <div class="card-body">
                             <?php if (count($pesananTerbaru) > 0): ?>
@@ -241,7 +241,7 @@ $jadwalMendatang = $stmt->fetchAll();
                             <?php endif; ?>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Jadwal Mendatang -->
                 <div class="col-6">

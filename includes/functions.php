@@ -129,7 +129,9 @@ function getPesananById($db, $pesananId) {
         SELECT p.*, 
                u.nama as nama_pelanggan, 
                b.nama_band, b.tarif,
-               pm.status as status_bayar
+               pm.status as status_bayar,
+               pm.metode as metode,
+               pm.bukti as bukti
         FROM pesanan p
         JOIN users u ON p.id_user = u.id
         JOIN band b ON p.id_band = b.id

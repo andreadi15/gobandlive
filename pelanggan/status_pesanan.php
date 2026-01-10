@@ -22,7 +22,7 @@ if ($detailId) {
         $detailPesanan = null;
     }
 }
-
+    
 // Query pesanan berdasarkan tab
 $sql = "
     SELECT p.*, 
@@ -91,6 +91,7 @@ $pesananList = $stmt->fetchAll();
                 <li><a href="dashboard.php">📊 Dashboard</a></li>
                 <li><a href="lihat_band.php">🎸 Lihat Band</a></li>
                 <li><a href="status_pesanan.php" class="active">📋 Pesanan Saya</a></li>
+                <li><a href="edit_profil.php">👤 Edit Profil</a></li>
                 <li><a href="../auth/logout.php">🚪 Logout</a></li>
             </ul>
         </aside>
