@@ -224,7 +224,7 @@ $pesananList = $stmt->fetchAll();
 
                                 <!-- Tombol Aksi -->
                                 <div style="margin-top: 2rem;">
-                                    <?php if ($detailPesanan['status'] === STATUS_SELESAI && $detailPesanan['has_ulasan'] == 0): ?>
+                                    <?php if ($detailPesanan['status'] === STATUS_SELESAI): ?>
                                         <a href="beri_ulasan.php?id=<?php echo $detailPesanan['id']; ?>" class="btn btn-success" style="width: 100%;">
                                             ⭐ Beri Ulasan
                                         </a>
@@ -297,7 +297,7 @@ $pesananList = $stmt->fetchAll();
                                             <a href="?id=<?php echo $pesanan['id']; ?>&tab=<?php echo $tab; ?>" class="btn btn-sm btn-primary">
                                                 Detail
                                             </a>
-                                            <?php if ($pesanan['status'] === STATUS_SELESAI && $pesanan['has_ulasan'] == 0): ?>
+                                            <?php if ($pesanan['status'] === STATUS_SELESAI): ?>
                                                 <a href="beri_ulasan.php?id=<?php echo $pesanan['id']; ?>" class="btn btn-sm btn-success">
                                                     Ulasan
                                                 </a>

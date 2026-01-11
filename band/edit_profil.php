@@ -283,17 +283,112 @@ if (isset($_POST['update_password'])) {
                         </div>
                          <div class="form-group">
                             <label class="form-label">Foto Band</label>
-                            <?php if ($bandData['foto'] && file_exists(__DIR__ . '/../uploads/band_photos/' . $bandData['foto'])): ?>
-                                <div style="margin-bottom: 1rem;">
-                                    <img src="../uploads/band_photos/<?php echo htmlspecialchars($bandData['foto']); ?>" 
-                                         alt="Foto Band" 
-                                         style="width: 200px; height: 200px; object-fit: cover; border-radius: var(--radius); border: 2px solid var(--light);">
-                                    <p class="text-gray" style="margin-top: 0.5rem; font-size: 0.9rem;">Foto saat ini</p>
+                            
+                            <!-- Preview Foto -->
+                            <div style="display: flex; gap: 2rem; align-items: start; flex-wrap: wrap;">
+                                <!-- Foto Saat Ini -->
+                                <?php if ($bandData['foto'] && file_exists(__DIR__ . '/../uploads/band_photos/' . $bandData['foto'])): ?>
+                                    <div>
+                                        <p class="text-gray" style="margin-bottom: 0.5rem; font-weight: 500;">📸 Foto Saat Ini</p>
+                                        <div style="position: relative; width: 200px; height: 200px;">
+                                            <img src="../uploads/band_photos/<?php echo htmlspecialchars($bandData['foto']); ?>" 
+                                                alt="Foto Band" 
+                                                id="currentPhoto"
+                                                style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius); border: 3px solid var(--primary); box-shadow: var(--shadow-lg);">
+                                            <div style="position: absolute; top: 10px; right: 10px; background: var(--success); color: white; padding: 0.3rem 0.6rem; border-radius: 999px; font-size: 0.75rem; font-weight: bold;">
+                                                ✓ Active
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php else: ?>
+                                    <div>
+                                        <p class="text-gray" style="margin-bottom: 0.5rem; font-weight: 500;">📸 Foto Saat Ini</p>
+                                        <div style="width: 200px; height: 200px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; flex-direction: column; color: white; box-shadow: var(--shadow-lg);">
+                                            <div style="font-size: 4rem; margin-bottom: 0.5rem;">🎤</div>
+                                            <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">Belum ada foto</p>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                                
+                                <!-- Preview Upload Baru -->
+                                <div id="previewContainer" style="display: none;">
+                                    <p class="text-gray" style="margin-bottom: 0.5rem; font-weight: 500;">🔄 Preview Foto Baru</p>
+                                    <div style="position: relative; width: 200px; height: 200px;">
+                                        <img id="photoPreview" 
+                                            src="" 
+                                            alt="Preview" 
+                                            style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius); border: 3px dashed var(--warning); box-shadow: var(--shadow-lg);">
+                                        <div style="position: absolute; top: 10px; right: 10px; background: var(--warning); color: white; padding: 0.3rem 0.6rem; border-radius: 999px; font-size: 0.75rem; font-weight: bold;">
+                                            ⏳ Preview
+                                        </div>
+                                    </div>
                                 </div>
-                            <?php endif; ?>
-                            <input type="file" name="foto" class="form-control" accept="image/jpeg,image/png,image/jpg">
-                            <small class="text-gray">Upload foto band (JPG/PNG, max 2MB). Kosongkan jika tidak ingin mengubah foto.</small>
+                            </div>
+                            
+                            <!-- Upload Button Styled -->
+                            <div style="margin-top: 1.5rem; padding: 1.5rem; background: var(--light); border-radius: var(--radius); border: 2px dashed var(--gray);">
+                                <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+                                    <label for="fotoInput" class="btn btn-primary" style="cursor: pointer; margin: 0;">
+                                        📁 Pilih Foto Band
+                                    </label>
+                                    <input type="file" 
+                                        name="foto" 
+                                        id="fotoInput"
+                                        class="form-control" 
+                                        accept="image/jpeg,image/png,image/jpg"
+                                        style="display: none;">
+                                    <span id="fileName" class="text-gray" style="font-style: italic;">Belum ada file dipilih</span>
+                                </div>
+                                <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: var(--radius); border-left: 4px solid var(--info);">
+                                    <p style="margin: 0; font-size: 0.9rem; color: var(--info); font-weight: 500;">ℹ️ Ketentuan Upload:</p>
+                                    <ul style="margin: 0.5rem 0 0 1.5rem; padding: 0; font-size: 0.85rem; color: var(--gray);">
+                                        <li>Format: JPG, JPEG, atau PNG</li>
+                                        <li>Ukuran maksimal: 2MB</li>
+                                        <li>Resolusi direkomendasikan: minimal 500x500px</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
+
+                        <script>
+                        // Preview foto sebelum upload
+                        document.getElementById('fotoInput').addEventListener('change', function(e) {
+                            const file = e.target.files[0];
+                            const fileName = document.getElementById('fileName');
+                            const previewContainer = document.getElementById('previewContainer');
+                            const photoPreview = document.getElementById('photoPreview');
+                            
+                            if (file) {
+                                // Update file name
+                                fileName.textContent = file.name;
+                                fileName.style.color = 'var(--success)';
+                                fileName.style.fontWeight = '500';
+                                
+                                // Show preview
+                                const reader = new FileReader();
+                                reader.onload = function(e) {
+                                    photoPreview.src = e.target.result;
+                                    previewContainer.style.display = 'block';
+                                }
+                                reader.readAsDataURL(file);
+                                
+                                // Validasi ukuran
+                                if (file.size > 2 * 1024 * 1024) {
+                                    alert('⚠️ Ukuran file terlalu besar! Maksimal 2MB');
+                                    e.target.value = '';
+                                    fileName.textContent = 'Belum ada file dipilih';
+                                    fileName.style.color = 'var(--gray)';
+                                    fileName.style.fontWeight = 'normal';
+                                    previewContainer.style.display = 'none';
+                                }
+                            } else {
+                                fileName.textContent = 'Belum ada file dipilih';
+                                fileName.style.color = 'var(--gray)';
+                                fileName.style.fontWeight = 'normal';
+                                previewContainer.style.display = 'none';
+                            }
+                        });
+                        </script>
                         <div class="form-group">
                             <label class="form-label">Deskripsi Band</label>
                             <textarea name="deskripsi" class="form-control" rows="4" placeholder="Ceritakan tentang band Anda..."><?php echo htmlspecialchars($bandData['deskripsi']); ?></textarea>

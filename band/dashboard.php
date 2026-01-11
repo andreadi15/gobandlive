@@ -170,7 +170,7 @@ $jadwalMendatang = $stmt->fetchAll();
                             <?php if ($bandData['foto'] && file_exists(__DIR__ . '/../uploads/band_photos/' . $bandData['foto'])): ?>
                                 <img src="../uploads/band_photos/<?php echo htmlspecialchars($bandData['foto']); ?>" 
                                      alt="<?php echo htmlspecialchars($bandData['nama_band']); ?>"
-                                     style="width: 120px; height: 120px; border-radius: var(--radius); object-fit: cover; box-shadow: var(--shadow-lg);">
+                                     style="width: 150px; height: 150px; border-radius: var(--radius); object-fit: cover; box-shadow: var(--shadow-lg);">
                             <?php else: ?>
                                 <div style="background: linear-gradient(135deg, var(--primary), var(--secondary)); height: 120px; width: 120px; border-radius: var(--radius); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
                                     🎤
